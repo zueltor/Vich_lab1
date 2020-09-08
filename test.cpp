@@ -5,7 +5,6 @@
 #include <utility>
 #include "equation.h"
 
-
 bool answerEquals(Roots &r1, Roots &r2) {
     if (r1.count != r2.count) {
         return false;
