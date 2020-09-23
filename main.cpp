@@ -5,7 +5,7 @@
 int main(int argc, char **argv) {
     Parameters cubic{};
     Roots r;
-    std::cout.precision(8);
+    std::cout.precision(4);
     if (argc < 6) {
         std::cout << "Expected 5 arguments: eps, delta, a, b, c\n";
         return EXIT_FAILURE;

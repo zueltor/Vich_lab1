@@ -39,11 +39,11 @@ long double Roots::findDiscriminant(Parameters &quadratic) {
 }
 
 void Roots::findIntervals(Parameters &cubic, Parameters &quadratic) {
-    long double det = findDiscriminant(quadratic);
+    long double desc = findDiscriminant(quadratic);
     r[0] = UNKNOWN;
     r[1] = UNKNOWN;
     r[2] = UNKNOWN;
-    if (det < EPS) {
+    if (desc < EPS) {
         printf("1\n");
         count = 1;
         long double val = cubic.calculateCubicValue(0);
@@ -59,11 +59,11 @@ void Roots::findIntervals(Parameters &cubic, Parameters &quadratic) {
             interval[0].lb = -INF;
             interval[0].ub = 0;
         }
-    } else if (det > EPS) {
+    } else if (desc > EPS) {
         long double eps = cubic.eps;
-        det = std::sqrt(det);
-        long double alpha = (-quadratic.b - det) / 2.0 / quadratic.a;
-        long double beta = (-quadratic.b + det) / 2.0 / quadratic.a;
+        desc = std::sqrt(desc);
+        long double alpha = (-quadratic.b - desc) / 2.0 / quadratic.a;
+        long double beta = (-quadratic.b + desc) / 2.0 / quadratic.a;
         long double val_alpha = cubic.calculateCubicValue(alpha);
         long double val_beta = cubic.calculateCubicValue(beta);
         if (val_alpha > eps && val_beta > eps) {
@@ -131,7 +131,7 @@ void Roots::localiseRoots(Parameters &cubic) {
                 }
             } while (sign * cubic.calculateCubicValue(lb) > 0);
             interval[i].lb = lb;
-        } else /*if (interval[i].ub == INF)*/ {
+        } else if (interval[i].ub == INF) {
             sign = cubic.calculateCubicValue(interval[i].lb);
             if (std::abs(sign) < eps) {
                 r[i] = interval[i].lb;
